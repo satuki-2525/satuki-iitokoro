@@ -15,13 +15,4 @@ body {
   input {
     height: 20px;
   }
-
-  #user-area {
-    display: none;
-}
-#login-area {
-    display: none;
-}
-#register-area {
-    display: none;
-}
+  

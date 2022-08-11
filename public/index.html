@@ -2,34 +2,33 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="assessment.css?202208172020">
+    <link rel="stylesheet" href="assessment.css">
     <title>あなたのいいところ診断</title>
   </head>
   <body>
-
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-analytics.js";
-        import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyBSA5dvpBtlptLbtotjn7wKKVYw40AUBVQ",
-          authDomain: "satuki-iitokoro.firebaseapp.com",
-          projectId: "satuki-iitokoro",
-          storageBucket: "satuki-iitokoro.appspot.com",
-          messagingSenderId: "101349506388",
-          appId: "1:101349506388:web:114b7ff4618bdbc12b1cc1",
-          measurementId: "G-KC1HJP4TQF"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth();
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-analytics.js";
+      import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBSA5dvpBtlptLbtotjn7wKKVYw40AUBVQ",
+        authDomain: "satuki-iitokoro.firebaseapp.com",
+        projectId: "satuki-iitokoro",
+        storageBucket: "satuki-iitokoro.appspot.com",
+        messagingSenderId: "101349506388",
+        appId: "1:101349506388:web:114b7ff4618bdbc12b1cc1",
+        measurementId: "G-KC1HJP4TQF"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth();
 
 // 新規会員登録処理
 const registerForm = document.getElementById('register-form');
@@ -53,61 +52,16 @@ registerForm.addEventListener('submit', (e) => {
   });
 });
 
-        // ログイン処理
-        const loginForm = document.getElementById('login-form');
-        const mailAddressInput = document.getElementById('mailAddress');
-        const passwordInput = document.getElementById('password');
-        loginForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const mailAddress = mailAddressInput.value;
-          const password = passwordInput.value;
-          signInWithEmailAndPassword(auth, mailAddress, password)
-          .then(() => {
-            // ログインフォームを初期化
-            mailAddressInput.value = '';
-            passwordInput.value = '';
-          })
-          .catch((error) => {
-            alert('ログインに失敗しました[' + error.message + ']');
-          });
-        });
-
-        // ログアウト処理
-        const logoutButton = document.getElementById('logoutButton');
-        logoutButton.addEventListener('click', () => {
-          signOut(auth);
-        });
-        // ログイン周りの処理の各エリア
-        const userArea = document.getElementById('user-area');
-        const loginArea = document.getElementById('login-area');
-        const registerArea = document.getElementById('register-area');
-
-
-// 認証状態の変更を画面に反映する
-onAuthStateChanged(auth, (user) => {
-
-
-          // ログイン周りの処理の各エリア全てを一旦非表示にする
-          userArea.style.display = 'none';
-          loginArea.style.display = 'none';
-          registerArea.style.display = 'none';
-  const userEmailText = document.getElementById('user-email-text');
-  if (user) {
-    userEmailText.innerText = user.email;
-                // ログインしている場合のエリアを表示する
-                userArea.style.display = 'block';
-  } else {
-            userEmailText.innerText = '';
-                        // ログインしていない場合のエリアを表示する
-                        loginArea.style.display = 'block';
-            registerArea.style.display = 'block';
+        // 認証状態の変更を画面に反映する
+        onAuthStateChanged(auth, (user) => {
+          const userEmailText = document.getElementById('user-email-text');
+          if (user) {
+            userEmailText.innerText = user.email;
           }
-});
+        });
+    </script>
 
-      </script>
 
-
-      
     <h1>あなたのいいところは?</h1>
     <p>診断したい名前を入れて下さい</p>
     <input type="text" id="user-name" size="40" maxlength="20">
@@ -150,7 +104,6 @@ onAuthStateChanged(auth, (user) => {
       </form>
     </div>
 
-
-    <script src="assessment.js"></script>
+    <script src="./assessment.js"></script>
   </body>
 </html>
